@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Mualliflar ro'yxati</h2>
+    <a href="{% url 'author_create' %}" class="btn btn-success">+ Muallif qo‘shish</a>
+  </div>
+  
+  <table class="table table-striped table-bordered shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ism Familya</th>
+        <th scope="col">Tug‘ilgan yili</th>
+        <th scope="col">Davlati</th>
+        <th scope="col">Amallar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for author in authors %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ author.full_name }}</td>
+        <td>{{ author.birth_date }}</td>
+        <td>{{ author.country }}</td>
+        <td>
+          <a href="{% url 'authors_update' author.pk %}" class="btn btn-warning d-inline-flex align-items-center justify-content-center p-0" 
+          style="width: 40px; height: 40px;" title="Tahrirlash">
+           <i class="bx bx-edit fs-4"></i>
+       </a>
+       
+       <a href="{% url 'authors_delete' author.pk %}" class="btn btn-danger d-inline-flex align-items-center justify-content-center p-0 ms-2" 
+          style="width: 40px; height: 40px;" title="O‘chirish">
+           <i class="bx bx-trash fs-4"></i>
+       </a>
+       <a href="{% url 'author_read' author.pk %}" class="btn btn-info d-inline-flex align-items-center justify-content-center p-0 ms-2" 
+             style="width: 40px; height: 40px;" title="Batafsil">
+           <i class="bx bx-show fs-4"></i>
+         </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="text-center">Hozircha hech qanday muallif yo‘q.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

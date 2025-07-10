@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .brand-bg {
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+        color: white;
+        border-radius: 10px 10px 0 0;
+        padding: 20px 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .xodim-details {
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        padding: 30px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .detail-value {
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: 500;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="brand-bg">
+                <h2 class="mb-0">Xodim ismi: {{ staff.full_name }}</h2>
+            </div>
+
+            <div class="xodim-details">
+                <p class="detail-value"><span class="detail-label">📞 Telefon raqami:</span> {{ staff.phone_number }}</p>
+                <p class="detail-value"><span class="detail-label">🎂 Tug‘ilgan sana:</span> {{ staff.bright|date:"Y-m-d" }}</p>
+                <p class="detail-value"><span class="detail-label">🚻 Jinsi:</span> {{ staff.gender }}</p>
+                <p class="detail-value"><span class="detail-label">💰 Oyligi:</span> {{ staff.balance }} so‘m</p>
+
+                <div class="text-end">
+                    <a href="{% url 'staff_view' %}" class="btn-back">← Orqaga</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

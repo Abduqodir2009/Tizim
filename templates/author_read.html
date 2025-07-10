@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .author-header {
+        background: linear-gradient(135deg, #8e2de2, #4a00e0);
+        color: white;
+        border-radius: 15px 15px 0 0;
+        padding: 25px 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        
+    }
+
+    .author-header h2 {
+        color: white; 
+    }
+
+    .author-details {
+        background-color: white;
+        border-radius: 0 0 15px 15px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .detail-row {
+        margin-bottom: 15px;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .detail-value {
+        color: #555;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: 500;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <!-- Header Card -->
+            <div class="author-header">
+                <h2 class="mb-0">📖 Muallif Tafsilotlari</h2>
+            </div>
+
+            <!-- Detail Card -->
+            <div class="author-details">
+                <div class="detail-row">
+                    <span class="detail-label">👤 To‘liq ismi:</span>
+                    <span class="detail-value">{{ author.full_name }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">🎂 Tug‘ilgan sana:</span>
+                    <span class="detail-value">{{ author.birth_date|date:"Y-m-d" }}</span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">🌍 Mamlakati:</span>
+                    <span class="detail-value">{{ author.country }}</span>
+                </div>
+
+                <div class="text-end">
+                    <a href="{% url 'author_view' %}" class="btn-back">← Orqaga</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

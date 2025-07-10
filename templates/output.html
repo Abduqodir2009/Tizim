@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Harajatlar ro'yxati</h2>
+        <a href="{% url 'output_create' %}" class="btn btn-success">+ Yangi chiqim qo‘shish</a>
+    </div>
+
+    <form method="get" class="mb-4 d-flex gap-2">
+        <input type="text" name="q" placeholder="Tavsif bo‘yicha qidirish..." value="{{ qidiruv }}" class="form-control w-25">
+        <select name="type_field" class="form-control w-25">
+            <option value="">Barcha turlari</option>
+            {% for ref in type_references %}
+                <option value="{{ ref.value }}" {% if ref.value == show_type_field %}selected{% endif %}>
+                    {{ ref.value }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary">Filtrlash</button>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Chiqim turi</th>
+                <th>Narxi</th>
+                <th>Tavsif</th>
+                <th>Sana</th>
+                <th>Amallar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in all_outputs %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item.type.value }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>
+                        {% if item.description|length > 5 %}
+                            {{ item.description|slice:":5" }}...
+                        {% else %}
+                            {{ item.description }}
+                        {% endif %}
+                    </td>
+                    <td>{{ item.careated_at }}</td>
+                    <td>
+                      <a href="{% url 'output_read' item.pk %}" class="btn btn-info d-inline-flex align-items-center justify-content-center p-0 me-2"
+                         style="width: 40px; height: 40px;" title="Batafsil">
+                        <i class="bx bx-show fs-4"></i>
+                      </a>
+
+                      <a href="{% url 'output_update' item.pk %}" class="btn btn-warning d-inline-flex align-items-center justify-content-center p-0 me-2"
+                         style="width: 40px; height: 40px;" title="Tahrirlash">
+                        <i class="bx bx-edit-alt fs-4"></i>
+                      </a>
+
+                      <a href="{% url 'output_delete' item.pk %}" class="btn btn-danger d-inline-flex align-items-center justify-content-center p-0"
+                         style="width: 40px; height: 40px;" title="O‘chirish">
+                        <i class="bx bx-trash fs-4"></i>
+                      </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">Hech qanday chiqim topilmadi.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

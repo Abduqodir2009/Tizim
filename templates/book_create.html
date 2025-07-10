@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h1 class="mb-4">📘 Yangi kitob qo‘shish</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">💾 Saqlash</button>
+    </form>
+
+    <a href="{% url 'home' %}" class="btn btn-secondary mt-3">⬅️ Orqaga qaytish</a>
+</div>
+
+{% endblock content %}

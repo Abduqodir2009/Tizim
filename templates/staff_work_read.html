@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<style>
+    .profile-card {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        border-radius: 15px;
+        padding: 40px 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        color: #333;
+        text-align: center;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        background: #ffffff;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        color: #ff6e48;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-box {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        color: #333;
+        margin-top: -20px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #666;
+    }
+
+    .info-value {
+        font-weight: 500;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-weight: 500;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    {{ work.staff.full_name|slice:":1" }}
+                </div>
+                <h3 class="mb-0">{{ work.staff.full_name }}</h3>
+                <p class="mt-1">💵 To‘lov tafsilotlari</p>
+            </div>
+
+            <div class="info-box">
+                <div class="info-row">
+                    <div class="info-label">💰 To‘lov summasi:</div>
+                    <div class="info-value">{{ work.price|floatformat:0 }} so‘m</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">📅 Sana:</div>
+                    <div class="info-value">{{work.created_at|date:"Y-m-d" }}</div>
+                </div>
+
+                <div class="text-end">
+                    <a href="{% url 'staff_view' %}" class="btn-back">← Orqaga</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

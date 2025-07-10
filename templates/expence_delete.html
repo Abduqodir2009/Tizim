@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-danger">
+        <h4>Rostdan ham bu ma'lumotni o'chirmoqchimisiz?</h4>
+        <p><strong>{{ reference }}</strong></p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Ha, o'chirish</button>
+            <a href="{% url 'expence_view' %}" class="btn btn-secondary">Yo‘q, orqaga</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

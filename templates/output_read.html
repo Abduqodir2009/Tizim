@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Chiqim tafsilotlari</h2>
+    <table class="table table-bordered mt-4">
+        <tr>
+            <th>ID</th>
+            <td>{{ chiqim.id }}</td>
+        </tr>
+        <tr>
+            <th>Turi</th>
+            <td>{{ chiqim.type.value }}</td>
+        </tr>
+        <tr>
+            <th>Narxi</th>
+            <td>{{ chiqim.price }}</td>
+        </tr>
+        <tr>
+            <th>Tavsif</th>
+            <td>{{ chiqim.description }}</td>
+        </tr>
+        <tr>
+            <th>Sana</th>
+            <td>{{ chiqim.careated_at }}</td>
+        </tr>
+    </table>
+    <a href="{% url 'output_view' %}" class="btn btn-secondary">Ortga qaytish</a>
+</div>
+{% endblock content %}

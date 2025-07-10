@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-warning text-white">
+            <h2>Ma'lumotni Tahrirlash</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+                <a href="{% url 'staff_view' %}" class="btn btn-secondary">Orqaga</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

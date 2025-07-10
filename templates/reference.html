@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="card mt-3">
+    <div class="card-header d-flex aling-items-center justify-content-between">
+        <h1>Ma'lumotlar</h1>
+        <a href="{% url 'reference_create' %}" class="btn btn-primary">Yangi ma'lumotnoma</a>
+    </div>
+        <div class="card-body">
+            
+            <div class="accordion mt-3" id="accordionExample">
+                <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionOne" aria-expanded="false" aria-controls="accordionOne">
+                            Kitob turi
+                        </button>
+                    </h2>
+                    
+                    <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                            {% for category in book_category %}
+                            <span>{{ category.value }}</span>
+                            <div>
+                                <a href="{% url 'reference_update' category.pk %}" class="btn btn-sm btn-warning">
+                                    <i class="bx bxs-edit"></i>
+                                </a>
+                                <a href="{% url 'reference_delete' category.pk %}" class="btn btn-sm btn-danger">
+                                    <i class="bx bxs-trash"></i>
+                                </a>
+                            </div>
+                          
+                        {% endfor %}
+                        
+                        </div>
+                    </div>
+                </div><div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionTwo" aria-expanded="false" aria-controls="accordionTwo">
+                            Jinsi
+                        </button>
+                    </h2>
+                    <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for category in gender %}
+                            <span>{{ category.value }}</span>
+                            <div>
+                                <a href="{% url 'reference_update' category.pk %}" class="btn btn-sm btn-warning">
+                                    <i class="bx bxs-edit"></i>
+                                </a>
+                                <a href="{% url 'reference_delete' category.pk %}" class="btn btn-sm btn-danger">
+                                    <i class="bx bxs-trash"></i>
+                                </a>
+                            </div>
+                          
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionThree" aria-expanded="false" aria-controls="accordionThree">
+                            Chiqim
+                        </button>
+                    </h2>
+                    <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {% for category in Chiqim %}
+                            <span>{{ category.value }}</span>
+                            <div>
+                                <a href="{% url 'reference_update' category.pk %}" class="btn btn-sm btn-warning">
+                                    <i class="bx bxs-edit"></i>
+                                </a>
+                                <a href="{% url 'reference_delete' category.pk %}" class="btn btn-sm btn-danger">
+                                    <i class="bx bxs-trash"></i>
+                                </a>
+                            </div>
+                          
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                    </div>
+                </div>
+            </div>
+            {% endblock content %}

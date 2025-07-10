@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Expence ro'yxati</h2>
+    <a href="{% url 'expence_create' %}" class="btn btn-success">+ Expence qo‘shish</a>
+  </div>
+  
+  <table class="table table-striped table-bordered shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Kitob nomi</th>
+        <th scope="col">Narxi</th>
+        <th scope="col">Soni</th>
+        <th scope="col">Umumiy narx</th>
+        <th scope="col">Izoh</th>
+        <th scope="col">Sana</th>
+        <th scope="col">Amallar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expence in all_expenses %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ expence.book.name }}</td>
+        <td>{{ expence.price }}</td>
+        <td>{{ expence.quantity }}</td>
+        <td>{{ expence.total_price }}</td>
+        
+        <td>
+          {% if expence.description|length > 5 %}
+            {{ expence.description|slice:":5" }}...
+          {% else %}
+            {{ expence.description }}
+          {% endif %}
+        </td>
+        
+        <td>{{ expence.creted_at|date:"M. d, Y" }}</td>
+        
+        <td>
+          <a href="{% url 'expence_update' expence.pk %}" class="btn btn-warning d-inline-flex align-items-center justify-content-center p-0" 
+             style="width: 40px; height: 40px;" title="Tahrirlash">
+            <i class="bx bx-edit fs-4"></i>
+          </a>
+          <a href="{% url 'expence_delete' expence.pk %}" class="btn btn-danger d-inline-flex align-items-center justify-content-center p-0 ms-2" 
+             style="width: 40px; height: 40px;" title="O‘chirish">
+            <i class="bx bx-trash fs-4"></i>
+          </a>
+          <a href="{% url 'expence_read' expence.pk %}" class="btn btn-info d-inline-flex align-items-center justify-content-center p-0 ms-2" 
+             style="width: 40px; height: 40px;" title="Batafsil">
+           <i class="bx bx-show fs-4"></i>
+         </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8" class="text-center">Hozircha hech qanday expence yo‘q.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

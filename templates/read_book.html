@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card shadow p-5 text-center">
+        {% if book.image %}
+            <div class="mb-4">
+                <img src="{{ book.image.url }}" 
+                     class="rounded shadow"
+                     style="height: 500px; width: auto;" 
+                     alt="{{ book.name }}">
+            </div>
+        {% endif %}
+
+        <h2 class="text-primary display-5">{{ book.name }}</h2>
+        <p class="text-muted fs-5"><strong>Muallif:</strong> {{ book.author }}</p>
+        <p class="text-muted fs-5"><strong>Turkum:</strong> {{ book.category }}</p>
+        <p class="text-muted fs-5"><strong>Narxi:</strong> ${{ book.price }}</p>
+        <p class="text-muted fs-5"><strong>Chiqilgan sana:</strong> {{ book.created_at|date:"d M Y" }}</p>
+        
+        <hr>
+        <p class="text-start fs-5">{{ book.description|linebreaks }}</p>
+
+        <a href="{% url 'home' %}" class="btn btn-secondary mt-4">⬅️ Ortga qaytish</a>
+    </div>
+</div>
+{% endblock content %}

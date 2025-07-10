@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+<h1 class="text-center mt-3">Daromad hisobi</h1>
+<div class="card p-4">
+    <div class="card-headr">
+        <form action="" class="d-flex justify-content-between align-items-center gap-3">
+
+         <div class="w-100">   
+        <label for="startDate">Boshlanish sanasi</label>
+        <input type="date" class="form-control" id="startDate" placeholder="Boshlanish sanasi">
+        </div>
+        <div class="w-100">
+        <label for="endDate">Tugash sanasi</label>
+        <input type="date" class="form-control" id="endDate" placeholder="Tugash sanasi">
+        </div>
+        <button class="btn btn-primary mt-4" id="calculateIncome">Hisoblash</button>
+        </form>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <h2>Hisoblangan daromad</h2>
+            <thead>
+                <tr>
+                    <th>Tur</th>
+                    <th>Summa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Xarid</td>
+                    <td>{{expemce_sum}}</td>
+                </tr>
+                <tr>
+                    <td>Chiqim</td>
+                    <td>{{outputs_sum}}</td>
+                </tr>   
+                <tr>
+                    <td>Xodim tolovlari</td>
+                    <td>{{staff_payment_sum}}</td>
+                </tr>
+                <tr>
+                    <td>Sotilgan kitob narxi</td>
+                    <td>{{sell_sum}}</td>
+                </tr>
+                
+                {% if profit < 0 %}
+                    <tr class="table-danger">
+                        <td>Zarar</td>
+                        <td class="text-danger">{{ profit }}</td>
+                     </tr>
+                {% else %}
+                    <tr class="table-success">
+                        <td>Foyda</td>
+                        <td colspan="2" class="text-success">{{ profit }}</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
