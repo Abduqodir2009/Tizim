@@ -61,13 +61,22 @@ def authors_delete(request, pk):
 
 @login_required(login_url='login')
 def reference_view(request):
+    qidiruv = request.GET.get('q', None)
+
     book_category = References.objects.filter(type="Kitob turi", is_deleted=False)
-    gender= References.objects.filter(type="Jinsi", is_deleted=False)
-    Chiqim= References.objects.filter(type="Chiqim", is_deleted=False)
+    gender = References.objects.filter(type="Jinsi", is_deleted=False)
+    chiqim = References.objects.filter(type="Chiqim", is_deleted=False)
+
+    if qidiruv:
+        book_category = book_category.filter(value__icontains=qidiruv)
+        gender = gender.filter(value__icontains=qidiruv)
+        chiqim = chiqim.filter(value__icontains=qidiruv)
+
     context = {
         "book_category": book_category,
-        "gender":gender,
-        "Chiqim":Chiqim
+        "gender": gender,
+        "Chiqim": chiqim,
+        "qidiruv": qidiruv,
     }
 
     return render(request, 'reference.html', context=context)

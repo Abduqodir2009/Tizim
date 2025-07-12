@@ -37,7 +37,7 @@ class Book(models.Model):
     category = models.ForeignKey(to=References, on_delete=models.CASCADE, related_name="book_category_reference")
     description = models.TextField(verbose_name="Ma'lumot")
     price = models.FloatField()
-    quantity=models.IntegerField()
+    quantity=models.IntegerField(default=0)
     created_at = models.DateField(verbose_name="Kitob yozilgan yil")
     is_deleted = models.BooleanField(default=False)
 

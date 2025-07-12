@@ -101,18 +101,22 @@ from datetime import date
 class BookForms(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['name', 'image', 'price', 'quantity', 'description', 'author', 'category', 'created_at']
+        fields = ['name', 'image', 'price',  'description', 'author', 'category', 'created_at']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
             'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'created_at': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Только те категории, где type='Kitob turi' и is_deleted=False
+        self.fields['category'].queryset = References.objects.filter(type='Kitob turi', is_deleted=False)
+    
     def clean_name(self):
         name = self.cleaned_data.get('name')
         if len(name.split()) >= 3:
